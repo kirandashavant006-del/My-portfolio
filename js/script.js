@@ -1,194 +1,95 @@
 "use strict";
 
+document.addEventListener("DOMContentLoaded", () => {
+    /* =========================
+       MOBILE NAVIGATION
+    ========================= */
+    const menuButton = document.querySelector(".menu-btn");
+    const navLinks = document.querySelector(".nav-links");
 
-/* =========================
-   MOBILE NAVIGATION
-========================= */
+    if (menuButton && navLinks) {
+        const toggleMenu = (isOpen) => {
+            navLinks.classList.toggle("active", isOpen);
+            menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+            menuButton.setAttribute("aria-expanded", isOpen.toString());
+            menuButton.textContent = isOpen ? "✕" : "☰";
+        };
 
-const menuButton = document.querySelector(".menu-btn");
-const navLinks = document.querySelector(".nav-links");
-
-if (menuButton && navLinks) {
-
-    menuButton.addEventListener("click", () => {
-
-        navLinks.classList.toggle("active");
-
-        const isOpen = navLinks.classList.contains("active");
-
-        menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Close menu" : "Open menu"
-        );
-
-        menuButton.setAttribute(
-            "aria-expanded",
-            isOpen
-        );
-
-        menuButton.textContent = isOpen ? "✕" : "☰";
-
-    });
-
-
-    /* Close menu after clicking a link */
-
-    const links = document.querySelectorAll(".nav-links a");
-
-    links.forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navLinks.classList.remove("active");
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Open menu"
-            );
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuButton.textContent = "☰";
-
+        menuButton.addEventListener("click", () => {
+            const isOpen = navLinks.classList.contains("active");
+            toggleMenu(!isOpen);
         });
 
-    });
-
-}
-
-
-/* =========================
-   SCROLL REVEAL ANIMATION
-========================= */
-
-const revealElements = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-
-    const windowHeight = window.innerHeight;
-
-    revealElements.forEach(element => {
-
-        const elementTop =
-            element.getBoundingClientRect().top;
-
-        if (elementTop < windowHeight - 100) {
-
-            element.classList.add("active");
-
-        }
-
-    });
-
-}
-
-
-/* Run when page loads */
-
-revealOnScroll();
-
-
-/* Run while scrolling */
-
-window.addEventListener(
-    "scroll",
-    revealOnScroll,
-    { passive: true }
-);
-
-
-/* =========================
-   BACK TO TOP BUTTON
-========================= */
-
-const topButton = document.getElementById("topButton");
-
-
-if (topButton) {
-
-    function handleTopButton() {
-
-        if (window.scrollY > 400) {
-
-            topButton.style.display = "block";
-
-        } else {
-
-            topButton.style.display = "none";
-
-        }
-
-    }
-
-
-    /* Check when page loads */
-
-    handleTopButton();
-
-
-    /* Check while scrolling */
-
-    window.addEventListener(
-        "scroll",
-        handleTopButton,
-        { passive: true }
-    );
-
-
-    /* Scroll to top */
-
-    topButton.addEventListener("click", () => {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        /* Close menu after clicking a link */
+        const links = navLinks.querySelectorAll("a");
+        links.forEach(link => {
+            link.addEventListener("click", () => toggleMenu(false));
         });
 
-    });
+        /* Close menu when clicking outside */
+        document.addEventListener("click", (event) => {
+            const clickedInsideMenu = navLinks.contains(event.target);
+            const clickedMenuButton = menuButton.contains(event.target);
 
-}
-
-
-/* =========================
-   CLOSE MOBILE MENU
-   WHEN CLICKING OUTSIDE
-========================= */
-
-document.addEventListener("click", event => {
-
-    if (!menuButton || !navLinks) {
-        return;
+            if (!clickedInsideMenu && !clickedMenuButton && navLinks.classList.contains("active")) {
+                toggleMenu(false);
+            }
+        });
     }
 
-    const clickedInsideMenu =
-        navLinks.contains(event.target);
+    /* =========================
+       SCROLL REVEAL ANIMATION
+    ========================= */
+    const revealElements = document.querySelectorAll(".reveal");
 
-    const clickedMenuButton =
-        menuButton.contains(event.target);
+    if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
 
-    if (
-        !clickedInsideMenu &&
-        !clickedMenuButton &&
-        navLinks.classList.contains("active")
-    ) {
-
-        navLinks.classList.remove("active");
-
-        menuButton.setAttribute(
-            "aria-label",
-            "Open menu"
-        );
-
-        menuButton.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        menuButton.textContent = "☰";
-
+        revealElements.forEach(element => revealObserver.observe(element));
+    } else {
+        revealElements.forEach(element => element.classList.add("active"));
     }
 
+    /* =========================
+       BACK TO TOP BUTTON
+    ========================= */
+    const topButton = document.getElementById("topButton");
+
+    if (topButton) {
+        let isTicking = false;
+
+        const handleTopButton = () => {
+            if (window.scrollY > 400) {
+                topButton.style.display = "block";
+            } else {
+                topButton.style.display = "none";
+            }
+            isTicking = false;
+        };
+
+        handleTopButton();
+
+        window.addEventListener("scroll", () => {
+            if (!isTicking) {
+                window.requestAnimationFrame(handleTopButton);
+                isTicking = true;
+            }
+        }, { passive: true });
+
+        topButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 });
