@@ -607,4 +607,21 @@ footer {
         width: 100%;
         text-align: center;
     }
+    @media (max-width: 768px) {
+    .hero,
+    .hero-content,
+    .hero-container {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content .btn,
+    .hero-actions {
+        margin: 0 auto;
+        display: inline-block;
+    }
+}
+
+
 }
