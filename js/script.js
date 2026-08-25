@@ -4,20 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================
        MOBILE NAVIGATION
     ========================= */
-    const menuButton = document.querySelector(".menu-btn");
-    const navLinks = document.querySelector(".nav-links");
+    const menuButton = document.getElementById("menuBtn") || document.querySelector(".menu-btn");
+    const navLinks = document.getElementById("navLinks") || document.querySelector(".nav-links");
 
     if (menuButton && navLinks) {
         const toggleMenu = (isOpen) => {
-            navLinks.classList.toggle("active", isOpen);
-            menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-            menuButton.setAttribute("aria-expanded", isOpen.toString());
-            menuButton.textContent = isOpen ? "✕" : "☰";
+            const state = typeof isOpen === "boolean" ? isOpen : !navLinks.classList.contains("active");
+            
+            navLinks.classList.toggle("active", state);
+            navLinks.classList.toggle("nav-active", state); // Fallback class match
+            menuButton.setAttribute("aria-label", state ? "Close navigation menu" : "Open navigation menu");
+            menuButton.setAttribute("aria-expanded", state.toString());
+            menuButton.textContent = state ? "✕" : "☰";
         };
 
-        menuButton.addEventListener("click", () => {
-            const isOpen = navLinks.classList.contains("active");
-            toggleMenu(!isOpen);
+        menuButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleMenu();
         });
 
         /* Close menu after clicking a link */
@@ -33,6 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!clickedInsideMenu && !clickedMenuButton && navLinks.classList.contains("active")) {
                 toggleMenu(false);
+            }
+        });
+
+        /* Close menu on Escape key press */
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && navLinks.classList.contains("active")) {
+                toggleMenu(false);
+                menuButton.focus();
             }
         });
     }

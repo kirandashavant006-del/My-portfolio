@@ -157,7 +157,7 @@ header {
 }
 
 /* =========================
-   HERO SECTION (BACKGROUND IMAGE: 48404.jpg)
+   HERO SECTION
 ========================= */
 
 .hero {
@@ -182,15 +182,15 @@ header {
 .hero-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px; /* Adds 40px space on the left and right edges */
+    padding: 0 40px;
     width: 100%;
+    position: relative;
+    z-index: 2;
 }
-
 
 .hero-content {
-    padding-left: 50px; /* Adjust this number to push text further right */
+    padding-left: 50px;
 }
-
 
 .small-title {
     color: var(--accent);
@@ -271,17 +271,6 @@ header {
 
 .social-links a:hover {
     color: var(--accent);
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* =========================
@@ -379,7 +368,7 @@ header {
 }
 
 /* =========================
-   SKILLS SECTION (CARDS GRID)
+   SKILLS SECTION
 ========================= */
 
 .skills-grid {
@@ -540,7 +529,7 @@ footer {
 }
 
 /* =========================
-   RESPONSIVE DESIGN (MOBILE FOCUS)
+   RESPONSIVE DESIGN
 ========================= */
 
 @media (max-width: 850px) {
@@ -551,7 +540,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* Navbar Alignment Fixed to Right */
     .navbar {
         padding: 18px 20px;
         position: relative;
@@ -571,11 +559,11 @@ footer {
         border-top: 1px solid #222222;
     }
 
-    .nav-links.active {
+    .nav-links.active,
+    .nav-links.nav-active {
         display: flex;
     }
 
-    /* Menu button aligned right side */
     .menu-btn {
         display: block;
         margin-left: auto;
@@ -592,6 +580,19 @@ footer {
         width: 42px;
         height: 42px;
     }
+
+    .hero-content {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -607,21 +608,4 @@ footer {
         width: 100%;
         text-align: center;
     }
-    @media (max-width: 768px) {
-    .hero,
-    .hero-content,
-    .hero-container {
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hero-content .btn,
-    .hero-actions {
-        margin: 0 auto;
-        display: inline-block;
-    }
-}
-
-
 }

@@ -20,7 +20,7 @@
                 Kiran<span>.</span>
             </div>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -29,14 +29,14 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
 
-            <button class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
                 ☰
             </button>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section with Background Image (48404.jpg) -->
+        <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-overlay"></div>
             <div class="container hero-container">
@@ -61,12 +61,11 @@
             </div>
         </section>
 
-        <!-- About Section with Image 2 (48414.png) -->
+        <!-- About Section -->
         <section id="about" class="section reveal">
             <div class="container about-grid">
                 <div class="about-image-wrapper">
                     <div class="about-image-card">
-                        <!-- Image 2 profile photo -->
                         <img src="images/48414.jpeg" alt="Kiran Dashavant Profile Photo">
                     </div>
                 </div>
@@ -85,7 +84,8 @@
                         <p><strong>Email:</strong> <a href="mailto:kirandashavnat006@gmail.com">kirandashavnat006@gmail.com</a></p>
                     </div>
                     <div class="about-actions">
-                       <a href="images/Kiran d resume.pdf" download="Kiran_Dashavant_Resume.pdf" class="btn">Download CV</a>
+                        <a href="images/Kiran d resume.pdf" download="Kiran_Dashavant_Resume.pdf" class="btn">Download CV</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -97,8 +97,6 @@
                 <h2>Technologies & Expertise</h2>
 
                 <div class="skills-grid">
-                    
-                    <!-- Web Development -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -107,7 +105,6 @@
                         <p>Responsive, modern & fast web interfaces built using HTML5, CSS3, and JavaScript.</p>
                     </div>
 
-                    <!-- App Development -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
@@ -116,7 +113,6 @@
                         <p>Cross-platform mobile applications crafted for speed and scalable usability.</p>
                     </div>
 
-                    <!-- React.js -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><circle cx="12" cy="12" r="2"/><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
@@ -125,7 +121,6 @@
                         <p>Dynamic, component-driven single-page web applications with interactive state management.</p>
                     </div>
 
-                    <!-- Node.js -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2zm0 2.31l7.5 4.12v7.14L12 19.69l-7.5-4.12V8.43L12 4.31z"/></svg>
@@ -134,7 +129,6 @@
                         <p>Scalable backend services, RESTful API implementations, and server-side processing.</p>
                     </div>
 
-                    <!-- Python -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M9.4 2h5.2c2.6 0 4.4 1.8 4.4 4.4v2.2H12v1.1h7v5.5c0 2.6-1.8 4.4-4.4 4.4H9.4c-2.6 0-4.4-1.8-4.4-4.4v-2.2h7v-1.1H5V6.4C5 3.8 6.8 2 9.4 2z"/></svg>
@@ -143,7 +137,6 @@
                         <p>Backend logic, data scripting, and robust software utility developments.</p>
                     </div>
 
-                    <!-- UI/UX Design -->
                     <div class="skill-card">
                         <div class="skill-icon">
                             <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.21-.64-1.67-.38-.45-.6-.99-.6-1.58 0-1.38 1.12-2.5 2.5-2.5H18c2.21 0 4-1.79 4-4 0-4.97-4.48-9-10-9zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8s1.5.67 1.5 1.5S7.33 11 6.5 11zm3-4c-.83 0-1.5-.67-1.5-1.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 8 17.5 8s1.5.67 1.5 1.5S18.33 11 17.5 11z"/></svg>
@@ -151,7 +144,6 @@
                         <h3>UI/UX Design</h3>
                         <p>User-centric design solutions focused on modern visuals, clean hierarchy, and smooth interactions.</p>
                     </div>
-
                 </div>
             </div>
         </section>
