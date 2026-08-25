@@ -180,15 +180,17 @@ header {
 }
 
 .hero-container {
-    position: relative;
-    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px; /* Adds 40px space on the left and right edges */
     width: 100%;
 }
 
+
 .hero-content {
-    max-width: 650px;
-    animation: fadeUp 1s ease forwards;
+    padding-left: 50px; /* Adjust this number to push text further right */
 }
+
 
 .small-title {
     color: var(--accent);
